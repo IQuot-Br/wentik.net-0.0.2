@@ -1,17 +1,38 @@
-name: Diagnóstico NovaBlog
+name: Build NovaBlog APK
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  diagnostico:
+  build:
+    name: Compilar APK NovaBlog
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4
 
-      - name: Listar arquivos do repositório
-        run: |
-          echo "=== ARQUIVOS NA RAIZ ==="
-          ls -la
-          echo "=== BUSCANDO O GRADLEW ==="
-          find . -name "gradlew"
+      - name: Configurar JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Tornar o Gradle executável
+        run: chmod +x gradlew
+        working-directory: wentik.net-0.0.2  # <-- Ajustado para o nome real da sua pasta
+
+      - name: Compilar APK (Debug)
+        run: ./gradlew assembleDebug
+        working-directory: wentik.net-0.0.2  # <-- Ajustado para o nome real da sua pasta
+
+      - name: Fazer upload do APK NovaBlog
+        uses: actions/upload-artifact@v4
+        with:
+          name: NovaBlog-Debug-APK
+          path: "**/*.apk"
