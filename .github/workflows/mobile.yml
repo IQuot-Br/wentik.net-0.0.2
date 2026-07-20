@@ -1,4 +1,4 @@
-name: Build Android APK
+name: Build NovaBlog APK
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    name: Build e Upload do APK
+    name: Compilar APK NovaBlog
     runs-on: ubuntu-latest
 
     steps:
@@ -25,12 +25,14 @@ jobs:
 
       - name: Tornar o Gradle executável
         run: chmod +x gradlew
+        working-directory: android # <-- Entra na pasta android antes de rodar
 
       - name: Compilar APK (Debug)
         run: ./gradlew assembleDebug
+        working-directory: android # <-- Entra na pasta android para compilar
 
-      - name: Fazer upload do APK
+      - name: Fazer upload do APK NovaBlog
         uses: actions/upload-artifact@v4
         with:
-          name: app-debug
-          path: app/build/outputs/apk/debug/app-debug.apk
+          name: NovaBlog-Debug-APK
+          path: "**/*.apk"
