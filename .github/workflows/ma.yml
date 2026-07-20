@@ -25,11 +25,9 @@ jobs:
 
       - name: Tornar o Gradle executável
         run: chmod +x gradlew
-        working-directory: wentik.net-0.0.2  # <-- Ajustado para o nome real da sua pasta
 
       - name: Compilar APK (Debug)
         run: ./gradlew assembleDebug
-        working-directory: wentik.net-0.0.2  # <-- Ajustado para o nome real da sua pasta
 
       - name: Fazer upload do APK NovaBlog
         uses: actions/upload-artifact@v4
