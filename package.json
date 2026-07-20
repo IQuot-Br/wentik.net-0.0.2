@@ -1,0 +1,13 @@
+{
+  "name": "nova-hub-app",
+  "version": "1.0.0",
+  "description": "A multi-feature web app with auth, admin panel, blogs, dev logs, notifications, and threads",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
